@@ -6,18 +6,23 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 
+constexpr unsigned wnd_width = 640;
+constexpr unsigned wnd_height = 480;
+constexpr unsigned framerate_cap = 60;
+constexpr float radius = 100.F;
+
 int main()
 {
-  sf::RenderWindow window(sf::VideoMode(640, 480), "ImGui + SFML = <3");
-  window.setFramerateLimit(60);
+  sf::RenderWindow window(sf::VideoMode(wnd_width, wnd_height), "ImGui + SFML = <3");
+  window.setFramerateLimit(framerate_cap);
   ImGui::SFML::Init(window);
 
-  sf::CircleShape shape(100.f);
+  sf::CircleShape shape(radius);
   shape.setFillColor(sf::Color::Green);
 
   sf::Clock deltaClock;
   while (window.isOpen()) {
-    sf::Event event;
+    sf::Event event{};
     while (window.pollEvent(event)) {
       ImGui::SFML::ProcessEvent(event);
 
